@@ -1,6 +1,8 @@
 package me.sirimperivm.spigot;
 
+import me.sirimperivm.spigot.utils.ConfigManager;
 import me.sirimperivm.spigot.utils.colors.Colors;
+import me.sirimperivm.spigot.utils.other.Errors;
 import me.sirimperivm.spigot.utils.other.Logger;
 import me.sirimperivm.spigot.utils.other.Strings;
 import org.apache.commons.lang3.Validate;
@@ -15,6 +17,8 @@ public final class Main extends JavaPlugin {
     private Colors colors;
     private Strings strings;
     private Logger log;
+    private ConfigManager configManager;
+    private Errors errors;
 
     @Override
     public void onEnable() {
@@ -22,6 +26,8 @@ public final class Main extends JavaPlugin {
         colors = new Colors(plugin);
         strings = new Strings(plugin);
         log = new Logger(plugin, "MonstersInAPocket");
+        configManager = new ConfigManager(plugin);
+        errors = new Errors(plugin);
 
         log.success("Plugin attivato correttamente!");
     }
@@ -63,5 +69,13 @@ public final class Main extends JavaPlugin {
 
     public Logger getLog() {
         return log;
+    }
+
+    public ConfigManager getConfigManager() {
+        return configManager;
+    }
+
+    public Errors getErrors() {
+        return errors;
     }
 }
