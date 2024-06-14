@@ -1,0 +1,6 @@
+name: MonstersInAPocket
+version: '${project.version}'
+main: me.sirimperivm.spigot.Main
+api-version: '1.20'
+authors: [SirImperivm_]
+description: Permette di catturare i mob non domestici in delle pocket, per spostarli dove si vuole.
