@@ -1,0 +1,5 @@
+permissions:
+  commands:
+    admin:
+      main: pocketmonsters.admin.main
+      reload: pocketmonsters.admin.reload

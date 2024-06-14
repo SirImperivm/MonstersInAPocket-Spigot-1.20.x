@@ -52,7 +52,7 @@ public class ConfigManager {
         }
     }
 
-    private void save(FileConfiguration c, File f) {
+    public void save(FileConfiguration c, File f) {
         String n = f.getName();
         try {
             c.save(f);
@@ -62,7 +62,7 @@ public class ConfigManager {
         }
     }
 
-    private void load(FileConfiguration c, File f) {
+    public void load(FileConfiguration c, File f) {
         String n = f.getName();
         try {
             c.load(f);
@@ -72,12 +72,12 @@ public class ConfigManager {
         }
     }
 
-    private void saveAll() {
+    public void saveAll() {
         save(settings, settingsFile);
         save(messages, messagesFile);
     }
 
-    private void loadAll() {
+    public void loadAll() {
         load(settings, settingsFile);
         load(messages, messagesFile);
     }

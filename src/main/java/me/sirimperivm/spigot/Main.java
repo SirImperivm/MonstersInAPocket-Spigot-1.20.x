@@ -1,5 +1,6 @@
 package me.sirimperivm.spigot;
 
+import me.sirimperivm.spigot.commands.AdminCommand;
 import me.sirimperivm.spigot.utils.ConfigManager;
 import me.sirimperivm.spigot.utils.colors.Colors;
 import me.sirimperivm.spigot.utils.other.Errors;
@@ -19,6 +20,7 @@ public final class Main extends JavaPlugin {
     private Logger log;
     private ConfigManager configManager;
     private Errors errors;
+    private ModuleManager moduleManager;
 
     @Override
     public void onEnable() {
@@ -28,6 +30,10 @@ public final class Main extends JavaPlugin {
         log = new Logger(plugin, "MonstersInAPocket");
         configManager = new ConfigManager(plugin);
         errors = new Errors(plugin);
+        moduleManager = new ModuleManager(plugin);
+
+        getCommand("pocketmonstersadmin").setExecutor(new AdminCommand(plugin));
+        getCommand("pocketmonstersadmin").setTabCompleter(new AdminCommand(plugin));
 
         log.success("Plugin attivato correttamente!");
     }
@@ -77,5 +83,9 @@ public final class Main extends JavaPlugin {
 
     public Errors getErrors() {
         return errors;
+    }
+
+    public ModuleManager getModuleManager() {
+        return moduleManager;
     }
 }

@@ -2,3 +2,20 @@ no-perm:
   command: "&8[&c!&8] &7Necessiti del permesso &c{node} &7per eseguire questo comando."
   action: "&8[&c!&8] &7Necessiti del permesso &c{node} &7per eseguire quest'azione."
 no-console: "&8[&c!&8] &7Questo comando è accessibile solo dagli utenti in gioco."
+page-not-found: "&8[&c!&8] &7La pagina &c{page}&7 non è stata trovata."
+plugin-reloaded: "&8[&a!&8] &7Il plugin è stato caricato correttamente."
+invalid-args:
+  only-numbers-allowed: "&8[&c!&8] &7Argomento &c{arg}&7 non valido, è previsto un numero."
+
+helps-creator:
+  admin-command:
+    header: "&4&m                              "
+    title: "&e&lComandi &c&lAdmin:"
+    spacer: "&r"
+    line-format: "{command-name} &7- {command-description}"
+    page-format: "&cPagina: &7{currentpage}"
+    footer: "&4&m                              "
+    lines:
+      - "&4/&cpocketmonstersadmin[pma] &e[help] [page]-&cMostra i comandi disponibili."
+      - "&4/&cpocketmonstersadmin[pma] reload-&cRicarica il plugin."
+    max-lines-per-page: 2
