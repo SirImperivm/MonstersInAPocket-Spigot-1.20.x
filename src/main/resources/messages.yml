@@ -6,6 +6,9 @@ page-not-found: "&8[&c!&8] &7La pagina &c{page}&7 non è stata trovata."
 plugin-reloaded: "&8[&a!&8] &7Il plugin è stato caricato correttamente."
 invalid-args:
   only-numbers-allowed: "&8[&c!&8] &7Argomento &c{arg}&7 non valido, è previsto un numero."
+shop:
+  opened: "&8[&a!&8] &7Aperto lo shop delle pocketballs."
+  cant-interact: "&8[&a!&8] &7Non puoi interagire con lo shop."
 
 helps-creator:
   admin-command:
@@ -18,4 +21,15 @@ helps-creator:
     lines:
       - "&4/&cpocketmonstersadmin[pma] &e[help] [page]-&cMostra i comandi disponibili."
       - "&4/&cpocketmonstersadmin[pma] reload-&cRicarica il plugin."
+    max-lines-per-page: 2
+  user-command:
+    header: "&9&m                              "
+    title: "&3&lComandi &f&lPocket&e&lMonsters:"
+    spacer: "&r"
+    line-format: "{command-name} &7- {command-description}"
+    page-format: "&3Pagina: &7{currentpage}"
+    footer: "&9&m                              "
+    lines:
+      - "&9/&3pocketmonsters[pm] &b[help] [page]-&3Mostra i comandi disponibili."
+      - "&9/&3pocketmonsters[pm] shop-&3Apre lo shop delle pocketballs."
     max-lines-per-page: 2

@@ -1,5 +1,22 @@
+settings:
+  number-formatter:
+    max-decimals-count: 2
+    numbers-associations-list:
+      - 1000.0-k
+      - 1000000.0-m
+      - 1000000000.0-M
+      - 1000000000000.0-b
+      - 1000000000000000.0-B
+      - 1000000000000000000.0-t
+      - 1000000000000000000000.0-T
+
 permissions:
   commands:
     admin:
       main: pocketmonsters.admin.main
       reload: pocketmonsters.admin.reload
+    user:
+      main: pocketmonsters.use
+      shop:
+        open: pocketmonsters.use
+        interact: pocketmonsters.use

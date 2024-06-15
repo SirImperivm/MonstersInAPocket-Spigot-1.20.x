@@ -12,7 +12,9 @@ import java.io.IOException;
 import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("all")
 public class ConfigManager {
@@ -21,8 +23,8 @@ public class ConfigManager {
     private Colors colors;
     private Logger log;
 
-    private File folder, settingsFile, messagesFile;
-    private FileConfiguration settings, messages;
+    private File folder, settingsFile, messagesFile, guisFile;
+    private FileConfiguration settings, messages, guis;
 
     public ConfigManager(Main plugin) {
         this.plugin = plugin;
@@ -34,10 +36,13 @@ public class ConfigManager {
         settings = new YamlConfiguration();
         messagesFile = new File(folder, "messages.yml");
         messages = new YamlConfiguration();
+        guisFile = new File(folder, "guis.yml");
+        guis = new YamlConfiguration();
 
         if (!folder.exists()) folder.mkdir();
         if (!settingsFile.exists()) create(settings, settingsFile);
         if (!messagesFile.exists()) create(messages, messagesFile);
+        if (!guisFile.exists()) create(guis, guisFile);
 
         loadAll();
     }
@@ -75,11 +80,21 @@ public class ConfigManager {
     public void saveAll() {
         save(settings, settingsFile);
         save(messages, messagesFile);
+        save(guis, guisFile);
     }
 
     public void loadAll() {
         load(settings, settingsFile);
         load(messages, messagesFile);
+        load(guis, guisFile);
+    }
+
+    public FileConfiguration getGuis() {
+        return guis;
+    }
+
+    public File getGuisFile() {
+        return guisFile;
     }
 
     public FileConfiguration getMessages() {
@@ -109,4 +124,17 @@ public class ConfigManager {
         }
         return coloredList;
     }
+
+    public List<String> getTranslatedList(FileConfiguration config, String target, HashMap<String, String> replacements) {
+        List<String> coloredList = new ArrayList<>();
+        for (String line : config.getStringList(target)) {
+            String modifiedLine = line;
+            for (Map.Entry<String, String> entry : replacements.entrySet()) {
+                modifiedLine = modifiedLine.replace(entry.getKey(), colors.translateString(entry.getValue()));
+            }
+            coloredList.add(colors.translateString(modifiedLine));
+        }
+        return coloredList;
+    }
+
 }

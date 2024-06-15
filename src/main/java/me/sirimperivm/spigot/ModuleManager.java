@@ -13,16 +13,16 @@ public class ModuleManager {
 
     private Main plugin;
     private Colors colors;
-    private Strings strings;
     private Logger log;
     private ConfigManager configManager;
+    private Strings strings;
 
     public ModuleManager(Main plugin) {
         this.plugin = plugin;
         colors = plugin.getColors();
-        strings = plugin.getStrings();
         log = plugin.getLog();
         configManager = plugin.getConfigManager();
+        strings = plugin.getStrings();
     }
 
     public void createHelp(CommandSender s, String helpTarget, int page) {

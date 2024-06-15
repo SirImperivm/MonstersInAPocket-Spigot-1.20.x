@@ -1,6 +1,9 @@
 package me.sirimperivm.spigot;
 
 import me.sirimperivm.spigot.commands.AdminCommand;
+import me.sirimperivm.spigot.commands.UserCommand;
+import me.sirimperivm.spigot.extras.dependencies.VaultAPI;
+import me.sirimperivm.spigot.extras.entities.Gui;
 import me.sirimperivm.spigot.utils.ConfigManager;
 import me.sirimperivm.spigot.utils.colors.Colors;
 import me.sirimperivm.spigot.utils.other.Errors;
@@ -16,24 +19,34 @@ public final class Main extends JavaPlugin {
 
     private Main plugin;
     private Colors colors;
-    private Strings strings;
     private Logger log;
     private ConfigManager configManager;
+    private Strings strings;
+    private Gui guis;
     private Errors errors;
     private ModuleManager moduleManager;
+    private VaultAPI vaultAPI;
+
+    private void setupDependencies() {
+        vaultAPI = new VaultAPI(plugin);
+    }
 
     @Override
     public void onEnable() {
         plugin = this;
         colors = new Colors(plugin);
-        strings = new Strings(plugin);
         log = new Logger(plugin, "MonstersInAPocket");
         configManager = new ConfigManager(plugin);
+        strings = new Strings(plugin);
+        guis = new Gui(plugin);
         errors = new Errors(plugin);
         moduleManager = new ModuleManager(plugin);
+        setupDependencies();
 
         getCommand("pocketmonstersadmin").setExecutor(new AdminCommand(plugin));
         getCommand("pocketmonstersadmin").setTabCompleter(new AdminCommand(plugin));
+        getCommand("pocketmonsters").setExecutor(new UserCommand(plugin));
+        getCommand("pocketmonsters").setTabCompleter(new UserCommand(plugin));
 
         log.success("Plugin attivato correttamente!");
     }
@@ -69,14 +82,6 @@ public final class Main extends JavaPlugin {
         return colors;
     }
 
-    public Strings getStrings() {
-        return strings;
-    }
-
-    public Logger getLog() {
-        return log;
-    }
-
     public ConfigManager getConfigManager() {
         return configManager;
     }
@@ -85,7 +90,23 @@ public final class Main extends JavaPlugin {
         return errors;
     }
 
+    public Gui getGuis() {
+        return guis;
+    }
+
+    public Logger getLog() {
+        return log;
+    }
+
     public ModuleManager getModuleManager() {
         return moduleManager;
+    }
+
+    public Strings getStrings() {
+        return strings;
+    }
+
+    public VaultAPI getVaultAPI() {
+        return vaultAPI;
     }
 }

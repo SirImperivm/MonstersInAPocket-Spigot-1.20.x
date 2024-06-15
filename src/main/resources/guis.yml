@@ -1,0 +1,70 @@
+shop:
+  title: "&9&lAcquista delle PocketBall"
+  rows: 3
+  filler:
+    enabled: true
+    material: GRAY_STAINED_GLASS_PANE
+    display: "&8*" # imposta su 'null' per non conferire nessun displayname
+    lore: []
+    glowing: false
+    model: 0
+  items:
+    buyx1:
+      material: STICK
+      displayed-amount: 1
+      display: "&3Acquista &b1 &3PocketBall"
+      lore:
+        - "&7&m                              "
+        - "&3Costo: &a${price}"
+        - "&7&m                              "
+      glowing: true
+      model: 0
+      slots:
+        - 11
+      settings:
+        click-action: BUY_POCKET
+        quantity: 1
+        price: 100.0
+    buyx8:
+      material: STICK
+      displayed-amount: 8
+      display: "&3Acquista &b8 &3PocketBall"
+      lore:
+        - "&7&m                              "
+        - "&3Costo: &a${price}"
+        - "&7&m                              "
+      glowing: true
+      model: 0
+      slots:
+        - 13
+      settings:
+        click-action: BUY_POCKET
+        quantity: 8
+        price: 500.0
+    buyx16:
+      material: STICK
+      displayed-amount: 16
+      display: "&3Acquista &b16 &3PocketBall"
+      lore:
+        - "&7&m                              "
+        - "&3Costo: &a${price}"
+        - "&7&m                              "
+      glowing: true
+      model: 0
+      slots:
+        - 15
+      settings:
+        click-action: BUY_POCKET
+        quantity: 16
+        price: 1200.0
+    close-menu:
+      material: BARRIER
+      displayed-amount: 1
+      display: "&c&nChiudi il Menù"
+      lore: []
+      glowing: false
+      model: 0
+      slots:
+        - 26
+      settings:
+        click-action: CLOSE_MENU
