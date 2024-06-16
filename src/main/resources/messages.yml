@@ -6,9 +6,8 @@ page-not-found: "&8[&c!&8] &7La pagina &c{page}&7 non è stata trovata."
 plugin-reloaded: "&8[&a!&8] &7Il plugin è stato caricato correttamente."
 invalid-args:
   only-numbers-allowed: "&8[&c!&8] &7Argomento &c{arg}&7 non valido, è previsto un numero."
-shop:
-  opened: "&8[&a!&8] &7Aperto lo shop delle pocketballs."
-  cant-interact: "&8[&a!&8] &7Non puoi interagire con lo shop."
+guis:
+  cant-interact: "&8[&a!&8] &7Non puoi interagire con questa gui."
 
 helps-creator:
   admin-command:

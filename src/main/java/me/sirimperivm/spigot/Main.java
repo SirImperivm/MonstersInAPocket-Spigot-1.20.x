@@ -22,7 +22,6 @@ public final class Main extends JavaPlugin {
     private Logger log;
     private ConfigManager configManager;
     private Strings strings;
-    private Gui guis;
     private Errors errors;
     private ModuleManager moduleManager;
     private VaultAPI vaultAPI;
@@ -38,7 +37,6 @@ public final class Main extends JavaPlugin {
         log = new Logger(plugin, "MonstersInAPocket");
         configManager = new ConfigManager(plugin);
         strings = new Strings(plugin);
-        guis = new Gui(plugin);
         errors = new Errors(plugin);
         moduleManager = new ModuleManager(plugin);
         setupDependencies();
@@ -88,10 +86,6 @@ public final class Main extends JavaPlugin {
 
     public Errors getErrors() {
         return errors;
-    }
-
-    public Gui getGuis() {
-        return guis;
     }
 
     public Logger getLog() {

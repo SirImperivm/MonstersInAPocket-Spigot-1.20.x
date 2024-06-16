@@ -7,6 +7,8 @@ import me.sirimperivm.spigot.utils.other.Logger;
 import me.sirimperivm.spigot.utils.other.Strings;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -16,6 +18,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 @SuppressWarnings("all")
 public class Gui {
@@ -26,22 +29,28 @@ public class Gui {
     private ConfigManager configManager;
     private Strings strings;
 
-    public Gui(Main plugin) {
+    private String inventoryName;
+    private String inventoryTitle;
+    private int inventoryRows;
+    private int inventorySize;
+
+    public Gui(Main plugin, String inventoryName) {
         this.plugin = plugin;
+        this.inventoryName = inventoryName;
         colors = plugin.getColors();
         log = plugin.getLog();
         configManager = plugin.getConfigManager();
         strings = plugin.getStrings();
+
+        inventoryTitle = configManager.getTranslatedString(configManager.getGuis(), inventoryName + ".title");
+        inventoryRows = configManager.getGuis().getInt(inventoryName + ".rows");
+        inventoryRows = inventoryRows > 0 ? inventoryRows : 1;
+        inventoryRows = inventoryRows < 7 ? inventoryRows : 6;
+        inventorySize = inventoryRows*9;
     }
 
-    public void playerOpenInventory(Player target, String inventoryName) {
-        String inventoryTitle = configManager.getTranslatedString(configManager.getGuis(), inventoryName + ".title");
-        int rows = configManager.getGuis().getInt(inventoryName + ".rows");
-        rows = rows > 0 ? rows : 1;
-        rows = rows < 7 ? rows : 6;
-        int size = rows *9;
-
-        Inventory gui = Bukkit.createInventory(null, size, inventoryTitle);
+    private Inventory constructInventory() {
+        Inventory inventory = Bukkit.createInventory(null, inventorySize, inventoryTitle);
 
         boolean fillerEnabled = configManager.getGuis().getBoolean(inventoryName + ".filler.enabled");
 
@@ -72,7 +81,7 @@ public class Gui {
             }
             double modifier = 0.0;
 
-            String clickAction = configManager.getGuis().getString(path + ".click-action");
+            String clickAction = configManager.getGuis().getString(path + ".settings.click-action");
             double itemPrice = 0;
             String formattedPrice = null;
             if (clickAction != null) {
@@ -114,23 +123,47 @@ public class Gui {
                 itemMeta.addEnchant(Enchantment.LURE, 1, true);
                 itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             }
+
             itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+            Attribute attribute = Attribute.ZOMBIE_SPAWN_REINFORCEMENTS;
+            itemMeta.addAttributeModifier(attribute, new AttributeModifier(UUID.randomUUID(), attribute.name(), modifier, AttributeModifier.Operation.MULTIPLY_SCALAR_1));
+
             itemMeta.setCustomModelData(configManager.getGuis().getInt(path + ".model"));;
             itemStack.setItemMeta(itemMeta);
 
             for (Integer slot : itemSlots) {
-                gui.setItem(slot, itemStack);
+                inventory.setItem(slot, itemStack);
             }
         }
 
         if (fillerEnabled) {
-            for (int slot=0; slot<size; slot++) {
-                if (gui.getItem(slot) == null || gui.getItem(slot).getType() == Material.AIR) {
-                    gui.setItem(slot, filler);
+            for (int slot=0; slot<inventorySize; slot++) {
+                if (inventory.getItem(slot) == null || inventory.getItem(slot).getType() == Material.AIR) {
+                    inventory.setItem(slot, filler);
                 }
             }
         }
 
-        target.openInventory(gui);
+        return inventory;
+    }
+
+    public void playerOpenInventory(Player target) {
+        target.openInventory(constructInventory());
+    }
+
+    public String getInventoryName() {
+        return inventoryName;
+    }
+
+    public int getInventoryRows() {
+        return inventoryRows;
+    }
+
+    public int getInventorySize() {
+        return inventorySize;
+    }
+
+    public String getInventoryTitle() {
+        return inventoryTitle;
     }
 }

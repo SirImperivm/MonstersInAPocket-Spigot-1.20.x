@@ -26,7 +26,6 @@ public class UserCommand implements CommandExecutor, TabExecutor {
     private Logger log;
     private ConfigManager configManager;
     private Strings strings;
-    private Gui guis;
     private Errors errors;
     private ModuleManager moduleManager;
     private VaultAPI vaultAPI;
@@ -37,7 +36,6 @@ public class UserCommand implements CommandExecutor, TabExecutor {
         log = plugin.getLog();
         configManager = plugin.getConfigManager();
         strings = plugin.getStrings();
-        guis = plugin.getGuis();
         errors = plugin.getErrors();
         moduleManager = plugin.getModuleManager();
         vaultAPI = plugin.getVaultAPI();
@@ -63,8 +61,8 @@ public class UserCommand implements CommandExecutor, TabExecutor {
                             return true;
                         } else {
                             Player p = (Player) s;
-                            guis.playerOpenInventory(p, "shop");
-                            p.sendMessage(configManager.getTranslatedString(configManager.getMessages(), "shop.opened"));
+                            Gui shopGui = new Gui(plugin, "shop");
+                            shopGui.playerOpenInventory(p);
                         }
                     }
                 } else {

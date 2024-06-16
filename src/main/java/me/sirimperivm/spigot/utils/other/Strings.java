@@ -27,7 +27,7 @@ public class Strings {
         List<String> associations = configManager.getSettings().getStringList("settings.number-formatter.numbers-associations-list");
         StringBuilder sb = new StringBuilder();
         String toReturn = String.valueOf(target);
-        String currencyValue = null;
+        String currencyValue = "";
 
         for (String associationString : associations) {
             String[] splitter = associationString.split("-");
@@ -51,7 +51,7 @@ public class Strings {
         }
 
         if (toReturn.length() >= decimalsCount) {
-            for (int i = 0; i < decimalsCount; i++) {
+            for (int i = 0; i <= decimalsCount; i++) {
                 if (toReturn.charAt(i) == '.') {
                     break;
                 }
